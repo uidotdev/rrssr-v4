@@ -20,11 +20,8 @@ class Grid extends Component {
     this.fetchRepos = this.fetchRepos.bind(this)
   }
   componentDidMount () {
-    const { repos } = this.state
-    const { fetchInitialData, match } = this.props
-
-    if (!repos) {
-      this.fetchRepos(match.params.id)
+    if (!this.state.repos) {
+      this.fetchRepos(this.props.match.params.id)
     }
   }
   componentWillReceiveProps (nextProps) {
@@ -48,7 +45,7 @@ class Grid extends Component {
   render() {
     const { loading, repos } = this.state
 
-    if (loading) {
+    if (loading === true) {
       return <p>LOADING</p>
     }
 

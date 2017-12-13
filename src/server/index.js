@@ -7,23 +7,6 @@ import serialize from "serialize-javascript"
 import App from '../shared/App'
 import routes from '../shared/routes'
 
-function body ({ data, markup }) {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Gister</title>
-        <script src="/bundle.js" defer></script>
-        <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
-      </head>
-
-      <body>
-        <div id="app">${markup}</div>
-      </body>
-    </html>
-  `
-}
-
 const app = express()
 
 app.use(cors())
@@ -45,12 +28,25 @@ app.get("*", (req, res, next) => {
       </StaticRouter>
     )
 
-    res.send(body({ data, markup }))
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>SSR with RR</title>
+          <script src="/bundle.js" defer></script>
+          <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
+        </head>
+
+        <body>
+          <div id="app">${markup}</div>
+        </body>
+      </html>
+    `)
   }).catch(next)
 })
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server is listening on port: ${process.env.PORT || 3000}`)
+app.listen(3000, () => {
+  console.log(`Server is listening on port: 3000`)
 })
 
 /*

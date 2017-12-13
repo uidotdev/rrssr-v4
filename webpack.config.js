@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
+var nodeExternals = require('webpack-node-externals')
 
 var browserConfig = {
   entry: './src/browser/index.js',
@@ -11,7 +12,6 @@ var browserConfig = {
   module: {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader' },
-      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
     ]
   },
   plugins: [
@@ -19,11 +19,12 @@ var browserConfig = {
       __isBrowser__: "true"
     })
   ]
-};
+}
 
 var serverConfig = {
   entry: './src/server/index.js',
   target: 'node',
+  externals: [nodeExternals()],
   output: {
     path: __dirname,
     filename: 'server.js',
@@ -41,4 +42,4 @@ var serverConfig = {
   ]
 }
 
-module.exports = [browserConfig, serverConfig];
+module.exports = [browserConfig, serverConfig]
