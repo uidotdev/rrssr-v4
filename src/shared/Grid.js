@@ -52,14 +52,8 @@ class Grid extends Component {
     return (
       <ul style={{display: 'flex', flexWrap: 'wrap'}}>
         {repos.map(({ name, owner, stargazers_count, html_url }) => (
-          <li key={name}>
+          <li key={name} style={{margin: 30}}>
             <ul>
-              <li>
-                <img
-                  src={owner.avatar_url}
-                  alt={'Avatar for ' + owner.login}
-                />
-              </li>
               <li><a href={html_url}>{name}</a></li>
               <li>@{owner.login}</li>
               <li>{stargazers_count} stars</li>
