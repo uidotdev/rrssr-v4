@@ -24,11 +24,9 @@ class Grid extends Component {
       this.fetchRepos(this.props.match.params.id)
     }
   }
-  componentWillReceiveProps (nextProps) {
-    const { match, fetchInitialData } = this.props
-
-    if (nextProps.match.params.id !== match.params.id) {
-      this.fetchRepos(nextProps.match.params.id)
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchRepos(this.props.match.params.id)
     }
   }
   fetchRepos (lang) {
