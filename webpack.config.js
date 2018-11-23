@@ -9,9 +9,19 @@ var browserConfig = {
     filename: 'bundle.js',
     publicPath: '/'
   },
+  mode: 'development',
   module: {
     rules: [
-      { test: /\.(js)$/, use: 'babel-loader' },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
     ]
   },
   plugins: [
@@ -24,6 +34,7 @@ var browserConfig = {
 var serverConfig = {
   entry: './src/server/index.js',
   target: 'node',
+  mode: 'development',
   externals: [nodeExternals()],
   output: {
     path: __dirname,
@@ -32,7 +43,16 @@ var serverConfig = {
   },
   module: {
     rules: [
-      { test: /\.(js)$/, use: 'babel-loader' }
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
     ]
   },
   plugins: [
