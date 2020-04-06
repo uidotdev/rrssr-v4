@@ -14,6 +14,7 @@ var browserConfig = {
       { test: /\.(js)$/, use: 'babel-loader' },
     ]
   },
+  mode: 'production',
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: "true"
@@ -30,6 +31,7 @@ var serverConfig = {
     filename: 'server.js',
     publicPath: '/'
   },
+  mode: 'production',
   module: {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader' }
